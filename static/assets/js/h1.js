@@ -187,22 +187,7 @@ SplashE.innerText = SplashT[SplashI];
 SplashE.addEventListener("click", US);
 // Random URL
 function getRandomUrl() {
-  const randomUrls = [
-    "https://kahoot.it",
-    "https://classroom.google.com",
-    "https://drive.google.com",
-    "https://google.com",
-    "https://docs.google.com",
-    "https://slides.google.com",
-    "https://www.nasa.gov",
-    "https://blooket.com",
-    "https://clever.com",
-    "https://edpuzzle.com",
-    "https://khanacademy.org",
-    "https://wikipedia.org",
-    "https://dictionary.com",
-  ];
-  return randomUrls[randRange(0, randomUrls.length)];
+  return "https://classroom.google.com/";
 }
 
 function randRange(min, max) {

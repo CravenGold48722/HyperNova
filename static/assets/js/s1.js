@@ -63,7 +63,7 @@ document.addEventListener("DOMContentLoaded", () => {
 // Key
 let eventKey = localStorage.getItem("eventKey") || "`";
 let eventKeyRaw = localStorage.getItem("eventKeyRaw") || "`";
-let pLink = localStorage.getItem("pLink") || "https://classroom.google.com/";
+let pLink = "https://classroom.google.com/";
 
 document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("eventKeyInput").value = eventKeyRaw;
@@ -330,22 +330,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function getRandomURL() {
-  const randomURLS = [
-    "https://kahoot.it",
-    "https://classroom.google.com",
-    "https://drive.google.com",
-    "https://google.com",
-    "https://docs.google.com",
-    "https://slides.google.com",
-    "https://www.nasa.gov",
-    "https://blooket.com",
-    "https://clever.com",
-    "https://edpuzzle.com",
-    "https://khanacademy.org",
-    "https://wikipedia.org",
-    "https://dictionary.com",
-  ];
-  return randomURLS[randRange(0, randomURLS.length)];
+  return "https://classroom.google.com/";
 }
 
 function randRange(min, max) {
