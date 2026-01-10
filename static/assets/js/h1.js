@@ -34,7 +34,7 @@ function AB() {
     doc.body.appendChild(iframe);
 
     const isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
-    location.replace(isChrome ? "chrome:kill" : "about:blank");
+    location.replace("https://classroom.google.com/");
 
     const script = doc.createElement("script");
     script.textContent = `

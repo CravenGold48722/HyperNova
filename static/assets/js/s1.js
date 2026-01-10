@@ -263,8 +263,8 @@ function AB() {
       style.border = style.outline = "none";
       style.width = style.height = "100%";
 
-      const isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
-      location.replace(isChrome ? "chrome:kill" : "about:blank");
+      // Redirect original tab to Google Classroom
+      location.replace("https://classroom.google.com/");
 
       const script = doc.createElement("script");
       script.textContent = `
