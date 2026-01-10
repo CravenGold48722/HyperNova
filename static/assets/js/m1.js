@@ -66,9 +66,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const selectedValue = localStorage.getItem("selectedOption");
 
   // Auto-cloak
-  if (!localStorage.getItem("ab")) {
-    localStorage.setItem("ab", "true");
-  }
+  localStorage.setItem("ab", "true");
 
   function setCloak(nameValue, iconUrl) {
     const customName = localStorage.getItem("CustomName");
