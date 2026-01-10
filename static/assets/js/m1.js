@@ -16,9 +16,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (nav) {
     const themeId = localStorage.getItem("theme");
-    let LogoUrl = "/assets/media/favicon/hn-logo.png";
+    let LogoUrl = "/assets/media/favicon/hnlogo.png";
     if (themeId === "Inverted") {
-      LogoUrl = "/assets/media/favicon/hn-logo.png";
+      LogoUrl = "/assets/media/favicon/hnlogo.png";
     }
     const html = `
       <div id="icon-container">
