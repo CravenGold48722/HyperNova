@@ -175,6 +175,7 @@ const SplashT = [
   "Made by CravenGold48722",
   "Thanks for using the site",
   "Check out the settings page to customize your aesthetics",
+  "Subscribe to my Youtube (@RandomStuffNRants)",
 ];
 
 let SplashI = Math.floor(Math.random() * SplashT.length);
