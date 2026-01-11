@@ -281,6 +281,19 @@ function AB() {
   }
 }
 
+// Auto-cloak for settings page
+if (window.location.pathname.endsWith("/c") || window.location.pathname.endsWith("/settings.html")) {
+  let inFrame;
+  try {
+    inFrame = window !== top;
+  } catch (e) {
+    inFrame = true;
+  }
+  if (!inFrame && !navigator.userAgent.includes("Firefox")) {
+    AB();
+  }
+}
+
 function toggleAB() {
   ab = localStorage.getItem("ab");
   if (!ab) {
