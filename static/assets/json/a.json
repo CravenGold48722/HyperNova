@@ -1,5 +1,11 @@
 [
   {
+    "name": "The BirdHub",
+    "link": "https://anonymousbirb5100.github.io",
+    "image": "/assets/media/icons/custom.webp",
+    "categories": ["all", "game"]
+  },
+  {
     "name": "! Create Custom App",
     "image": "/assets/media/icons/custom.webp",
     "categories": ["all"],
