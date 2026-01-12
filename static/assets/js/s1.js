@@ -250,8 +250,8 @@ function AB() {
       const style = iframe.style;
       const link = doc.createElement("link");
 
-      const name = localStorage.getItem("name") || "My Drive - Google Drive";
-      const icon = localStorage.getItem("icon") || "https://ssl.gstatic.com/docs/doclist/images/drive_2022q3_32dp.png";
+      const name = localStorage.getItem("name") || "Google";
+      const icon = localStorage.getItem("icon") || "/assets/media/favicon/google.png";
 
       doc.title = name;
       link.rel = "icon";
@@ -267,13 +267,6 @@ function AB() {
       location.replace("https://classroom.google.com/");
 
       const script = doc.createElement("script");
-      script.textContent = `
-        window.onbeforeunload = function (event) {
-          const confirmationMessage = 'Leave Site?';
-          (event || window.event).returnValue = confirmationMessage;
-          return confirmationMessage;
-        };
-      `;
       doc.head.appendChild(link);
       doc.body.appendChild(iframe);
       doc.head.appendChild(script);
