@@ -27,17 +27,12 @@ body {
 }
 
 .settings-card {
-   background-color: #001866;
+   background-color: #001e80;
    border-radius: 10px;
    padding: 20px;
    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
    width: 400px;
    transition: all 0.3s ease;
-}
-
-.settings-card:hover {
-   transform: translatey(-5px);
-   box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
 }
 
 .settings-card h3 {
@@ -47,6 +42,14 @@ body {
 
 .settings-card p {
    color: var(--text-placeholder);
+}
+
+input,
+select,
+.key-form,
+.key-button,
+button {
+   background-color: #001866 !important;
 }
 
 a {
