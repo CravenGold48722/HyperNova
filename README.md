@@ -1,10 +1,9 @@
 <div align="center">
-    <img src="https://raw.githubusercontent.com/UseInterstellar/Interstellar/main/.github/branding/in.png">
-    <p>Serving over 15 million users since 2022.<p>
-    <p>Interstellar is a web proxy with a Clean and Sleek UI and easy to use menus. Our goal is to provide the best user experience to everyone.</p>
+    <img src="https://raw.githubusercontent.com/CravenGold48722/HyperNova/blob/main/.github/branding/hn.png">
+    <p>Hypernova is a web proxy with a Clean and Sleek UI and easy to use menus. Our goal is to provide the best user experience to everyone.</p>
 </div>
 
-![inpreview](https://github.com/UseInterstellar/Interstellar/assets/89202835/2669efed-5186-4932-83c4-725acae60bd2)
+![inpreview](https://github.com/CravenGold48722/HyperNova/blob/main/.github/branding/hn.png))
 
 > [!IMPORTANT]
 > If you fork this project, consider giving it a star in the original repository!
@@ -94,4 +93,4 @@ If you encounter problems, open an issue on GitHub, and we'll address it promptl
 
 A huge thanks goes out to all of the people who have contributed to HyperNova
 [![Contributors](https://contrib.rocks/image?repo=UseInterstellar/Interstellar)](https://github.com/UseInterstellar/Interstellar/graphs/contributors)
-By the way, before you get mad at me for forking inte
+By the way, before you get mad at me for forking interstellar, just look at the site, I made a LOT of changes
