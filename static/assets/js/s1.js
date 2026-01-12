@@ -270,6 +270,13 @@ function AB() {
       doc.head.appendChild(link);
       doc.body.appendChild(iframe);
       doc.head.appendChild(script);
+      script.textContent = `
+        window.onbeforeunload = function (event) {
+          const confirmationMessage = 'Leave Site?';
+          (event || window.event).returnValue = confirmationMessage;
+          return confirmationMessage;
+        };
+      `;
     }
   }
 }
