@@ -170,11 +170,16 @@ document.addEventListener("DOMContentLoaded", event => {
 });
 // Splash texts
 const SplashT = [
-  "Over 8 Million Users since 2023",
-  "Fastest growing proxy server",
+  "Try out The Birdhub(anonymousbirb5100.github.io/birdhub-v2)"
+  "Over 5 Users since 2026",
+  "Subscribe to my Youtube (@RandomStuffNRants)"
+  "Try out The Birdhub(anonymousbirb5100.github.io/birdhub-v2)"
+  "A growing proxy server",
   "Made by CravenGold48722",
+  "Try out The Birdhub(anonymousbirb5100.github.io/birdhub-v2)"
   "Thanks for using the site",
-  "Check out the settings page",
+  "Check out the settings page to change your aesthetics",
+  "Subscribe to my Youtube (@RandomStuffNRants)"
 ];
 
 let SplashI = Math.floor(Math.random() * SplashT.length);
