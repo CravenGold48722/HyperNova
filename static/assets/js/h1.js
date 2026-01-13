@@ -1,12 +1,3 @@
-// home.js
-let inFrame;
-
-try {
-  inFrame = window !== top;
-} catch (e) {
-  inFrame = true;
-}
-
 function AB() {
   const popup = open("about:blank#", "_blank");
   if (!popup || popup.closed) {
@@ -46,6 +37,14 @@ function AB() {
     `;
     doc.head.appendChild(script);
   }
+}
+// home.js
+let inFrame;
+
+try {
+  inFrame = window !== top;
+} catch (e) {
+  inFrame = true;
 }
 AB();
 
