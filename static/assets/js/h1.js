@@ -1,43 +1,3 @@
-function AB() {
-  const popup = open("about:blank", "_blank");
-  if (!popup || popup.closed) {
-    
-  } else {
-    const doc = popup.document;
-    const iframe = doc.createElement("iframe");
-    const style = iframe.style;
-    const link = doc.createElement("link");
-
-    const name = localStorage.getItem("name") || "Google";
-    const icon = localStorage.getItem("icon") || "/assets/media/favicon/google.png";
-
-    doc.title = name;
-    link.rel = "icon";
-    link.href = icon;
-
-    iframe.src = location.href;
-    style.position = "fixed";
-    style.top = style.bottom = style.left = style.right = 0;
-    style.border = style.outline = "none";
-    style.width = style.height = "100%";
-
-    doc.head.appendChild(link);
-    doc.body.appendChild(iframe);
-
-    const isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
-    location.replace("https://classroom.google.com/");
-
-    const script = doc.createElement("script");
-    script.textContent = `
-      window.onbeforeunload = function (event) {
-        const confirmationMessage = 'Leave Site?';
-        (event || window.event).returnValue = confirmationMessage;
-        return confirmationMessage;
-      };
-    `;
-    doc.head.appendChild(script);
-  }
-}
 // home.js
 let inFrame;
 
@@ -46,7 +6,6 @@ try {
 } catch (e) {
   inFrame = true;
 }
-AB();
 
 // Particles
 document.addEventListener("DOMContentLoaded", event => {
