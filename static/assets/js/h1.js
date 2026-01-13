@@ -8,12 +8,7 @@ function AB() {
     const style = iframe.style;
     const link = doc.createElement("link");
 
-    const name = localStorage.getItem("name") || "Google";
-    const icon = localStorage.getItem("icon") || "/assets/media/favicon/google.png";
 
-    doc.title = name;
-    link.rel = "icon";
-    link.href = icon;
 
     iframe.src = location.href;
     style.position = "fixed";
@@ -36,6 +31,11 @@ function AB() {
       };
     `;
     doc.head.appendChild(script);
+    const name = localStorage.getItem("name") || "Google";
+    const icon = localStorage.getItem("icon") || "/assets/media/favicon/google.png";
+    doc.title = name;
+    link.rel = "icon";
+    link.href = icon;
   }
 }
 // home.js
@@ -195,3 +195,4 @@ function getRandomUrl() {
 function randRange(min, max) {
   return Math.floor(Math.random() * (max - min) + min);
 }
+
