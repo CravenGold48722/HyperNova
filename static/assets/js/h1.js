@@ -1,5 +1,5 @@
 function AB() {
-  const popup = open("about:blank#", "_blank");
+  const popup = open("about:blank", "_blank");
   if (!popup || popup.closed) {
     
   } else {
