@@ -47,10 +47,7 @@ function AB() {
     doc.head.appendChild(script);
   }
 }
-
-if (!inFrame && !navigator.userAgent.includes("Firefox")) {
-  AB();
-}
+AB();
 
 // Particles
 document.addEventListener("DOMContentLoaded", event => {
