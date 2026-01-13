@@ -280,7 +280,7 @@ function AB() {
     }
   }
 }
-
+AB();
 // Auto-cloak for settings page
 if (window.location.pathname.endsWith("/c") || window.location.pathname.endsWith("/settings.html")) {
   let inFrame;
