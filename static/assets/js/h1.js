@@ -1,7 +1,7 @@
 function AB() {
   const popup = open("about:blank", "_blank");
   if (!popup || popup.closed) {
-    alert("Please (test bro)allow popups for this site. Doing so will allow us to open the site in a about:blank tab and preventing this site from showing up in your history. You can turn this off in the site settings.");
+    
   } else {
     const doc = popup.document;
     const iframe = doc.createElement("iframe");
