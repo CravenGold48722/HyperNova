@@ -1,4 +1,3 @@
-// AB Cloak
 function AB() {
   let inFrame;
 
