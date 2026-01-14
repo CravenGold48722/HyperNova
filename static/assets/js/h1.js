@@ -22,15 +22,6 @@ function AB() {
     const isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
     location.replace("https://classroom.google.com/");
 
-    const script = doc.createElement("script");
-    script.textContent = `
-      window.onbeforeunload = function (event) {
-        const confirmationMessage = 'Leave Site?';
-        (event || window.event).returnValue = confirmationMessage;
-        return confirmationMessage;
-      };
-    `;
-    doc.head.appendChild(script);
     const name = localStorage.getItem("name") || "Google";
     const icon = localStorage.getItem("icon") || "/assets/media/favicon/google.png";
     doc.title = name;
