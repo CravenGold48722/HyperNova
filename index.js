@@ -20,16 +20,21 @@ const app = express();
 const bareServer = createBareServer("/ca/");
 const PORT = process.env.PORT || 8080;
 const cache = new Map();
-const CACHE_TTL = 30 * 24 * 60 * 60 * 1000; // Cache for 30 Days
+const CACHE_TTL = 30 * 24 * 60 * 60 * 1000;
 
 if (config.challenge !== false) {
   console.log(chalk.green("🔒 Password protection is enabled! Listing logins below"));
-  // biome-ignore lint: idk
   Object.entries(config.users).forEach(([username, password]) => {
     console.log(chalk.blue(`Username: ${username}, Password: ${password}`));
   });
   app.use(basicAuth({ users: config.users, challenge: true }));
 }
+
+app.use(cookieParser());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, "static")));
+app.use("/ca", cors({ origin: true }));
 
 app.get("/e/*", async (req, res, next) => {
   try {
@@ -57,14 +62,10 @@ app.get("/e/*", async (req, res, next) => {
       }
     }
 
-    if (!reqTarget) {
-      return next();
-    }
+    if (!reqTarget) return next();
 
     const asset = await fetch(reqTarget);
-    if (!asset.ok) {
-      return next();
-    }
+    if (!asset.ok) return next();
 
     const data = Buffer.from(await asset.arrayBuffer());
     const ext = path.extname(reqTarget);
@@ -81,17 +82,20 @@ app.get("/e/*", async (req, res, next) => {
   }
 });
 
-app.use(cookieParser());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
-/* if (process.env.MASQR === "true") {
-  console.log(chalk.green("Masqr is enabled"));
-  setupMasqr(app);
-} */
-
-app.use(express.static(path.join(__dirname, "static")));
-app.use("/ca", cors({ origin: true }));
+// ==================== EDITED / ROUTE ====================
+app.get("/", (req, res, next) => {
+  try {
+    const indexPath = path.join(__dirname, "static", "index.html");
+    const stream = fs.createReadStream(indexPath);
+    res.setHeader("Content-Type", "text/html");
+    stream.pipe(res, { end: false });
+    stream.on("end", () => res.end());
+  } catch (err) {
+    console.error(err);
+    res.status(500).sendFile(path.join(__dirname, "static", "404.html"));
+  }
+});
+// =========================================================
 
 const routes = [
   { path: "/b", file: "apps.html" },
@@ -99,10 +103,8 @@ const routes = [
   { path: "/play.html", file: "games.html" },
   { path: "/c", file: "settings.html" },
   { path: "/d", file: "tabs.html" },
-  { path: "/", file: "index.html" },
 ];
 
-// biome-ignore lint: idk
 routes.forEach(route => {
   app.get(route.path, (_req, res) => {
     res.sendFile(path.join(__dirname, "static", route.file));
