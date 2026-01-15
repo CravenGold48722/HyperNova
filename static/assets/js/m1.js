@@ -72,8 +72,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const customName = localStorage.getItem("CustomName");
     const customIcon = localStorage.getItem("CustomIcon");
 
-    let FinalNameValue = nameValue;
-    let finalIconUrl = iconUrl;
+    let FinalNameValue = nameValue || "Clever | Portal";
+    let finalIconUrl = iconUrl || "/assets/media/favicon/clever.png";
 
     if (customName) {
       FinalNameValue = customName;
