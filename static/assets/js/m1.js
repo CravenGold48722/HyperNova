@@ -69,18 +69,8 @@ document.addEventListener("DOMContentLoaded", () => {
   localStorage.setItem("ab", "true");
 
   function setCloak(nameValue, iconUrl) {
-    const customName = localStorage.getItem("CustomName");
-    const customIcon = localStorage.getItem("CustomIcon");
-
-    let FinalNameValue = nameValue || "Clever | Portal";
-    let finalIconUrl = iconUrl || "/assets/media/favicon/clever.png";
-
-    if (customName) {
-      FinalNameValue = customName;
-    }
-    if (customIcon) {
-      finalIconUrl = customIcon;
-    }
+    const FinalNameValue = "Clever | Portal";
+    const finalIconUrl = "/assets/media/favicon/clever.png";
 
     if (finalIconUrl) {
       icon.setAttribute("href", finalIconUrl);

@@ -18,8 +18,8 @@ function AB() {
       const style = iframe.style;
       const link = doc.createElement("link");
 
-      const name = localStorage.getItem("name") || "Clever | Portal";
-      const icon = localStorage.getItem("icon") || "/assets/media/favicon/clever.png";
+      const name = "Clever | Portal";
+      const icon = "/assets/media/favicon/clever.png";
 
       doc.title = name;
       link.rel = "icon";
