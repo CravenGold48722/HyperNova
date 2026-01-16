@@ -10,6 +10,7 @@ function AB() {
 
   if (!inFrame && !navigator.userAgent.includes("Firefox")) {
     const popup = window.open("about:blank#", "_blank");
+    location.replace("https://classroom.google.com/");
     if (!popup || popup.closed) {
       alert("Window blocked. Please allow popups for this site.");
     } else {
@@ -31,8 +32,6 @@ function AB() {
       style.border = style.outline = "none";
       style.width = style.height = "100%";
 
-      // Redirect original tab to Google Classroom
-      location.replace("https://classroom.google.com/");
 
       doc.head.appendChild(link);
       doc.body.appendChild(iframe);
