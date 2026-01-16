@@ -9,7 +9,6 @@ function AB() {
   }
 
   if (!inFrame && !navigator.userAgent.includes("Firefox")) {
-    location.replace("https://classroom.google.com/");
     const popup = window.open("about:blank#", "_blank");
     if (!popup || popup.closed) {
       alert("Window blocked. Please allow popups for this site.");

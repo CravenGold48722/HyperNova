@@ -1,5 +1,4 @@
 function AB() {
-  location.replace("https://classroom.google.com/");
   const popup = open("about:blank", "_blank");
   if (!popup || popup.closed) {
     
