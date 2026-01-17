@@ -9,10 +9,9 @@ import express from "express";
 import basicAuth from "express-basic-auth";
 import mime from "mime";
 import fetch from "node-fetch";
-// import { setupMasqr } from "./Masqr.js";
 import config from "./config.js";
 
-console.log(chalk.yellow("🚀 Starting server..."));
+console.log(chalk.yellow("Starting server..."));
 
 const __dirname = process.cwd();
 const server = http.createServer();
@@ -22,11 +21,52 @@ const PORT = process.env.PORT || 8080;
 const cache = new Map();
 const CACHE_TTL = 30 * 24 * 60 * 60 * 1000;
 
-if (config.challenge !== false) {
-  console.log(chalk.green("🔒 Password protection is enabled! Listing logins below"));
-  Object.entries(config.users).forEach(([username, password]) => {
-    console.log(chalk.blue(`Username: ${username}, Password: ${password}`));
+/* ======================================================
+   MERGED FETCH FUNCTION (from your standalone script)
+====================================================== */
+
+const targetUrl = "https://google.com";
+const customReferer = "https://classroom.google.com/";
+
+async function makeRequest() {
+  console.log("=== Sending Request ===");
+  console.log(`Target URL: ${targetUrl}`);
+  console.log(`Custom Referer: ${customReferer}`);
+  console.log("=======================\n");
+
+  const response = await fetch(targetUrl, {
+    method: "GET",
+    headers: {
+      Referer: customReferer,
+      "User-Agent": "Node.js Custom Client"
+    }
   });
+
+  const text = await response.text();
+
+  return {
+    status: response.status,
+    statusText: response.statusText,
+    preview: text.substring(0, 500)
+  };
+}
+
+/* Optional route to trigger the request */
+app.get("/test-fetch", async (_req, res) => {
+  try {
+    const result = await makeRequest();
+    res.json(result);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+/* ======================================================
+   AUTH / MIDDLEWARE
+====================================================== */
+
+if (config.challenge !== false) {
+  console.log(chalk.green("Password protection is enabled"));
   app.use(basicAuth({ users: config.users, challenge: true }));
 }
 
@@ -36,22 +76,25 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "static")));
 app.use("/ca", cors({ origin: true }));
 
+/* ======================================================
+   ASSET ROUTE WITH CACHE
+====================================================== */
+
 app.get("/e/*", async (req, res, next) => {
   try {
     if (cache.has(req.path)) {
       const { data, contentType, timestamp } = cache.get(req.path);
-      if (Date.now() - timestamp > CACHE_TTL) {
-        cache.delete(req.path);
-      } else {
+      if (Date.now() - timestamp <= CACHE_TTL) {
         res.writeHead(200, { "Content-Type": contentType });
         return res.end(data);
       }
+      cache.delete(req.path);
     }
 
     const baseUrls = {
       "/e/1/": "https://raw.githubusercontent.com/qrs/x/fixy/",
       "/e/2/": "https://raw.githubusercontent.com/3v1/V5-Assets/main/",
-      "/e/3/": "https://raw.githubusercontent.com/3v1/V5-Retro/master/",
+      "/e/3/": "https://raw.githubusercontent.com/3v1/V5-Retro/master/"
     };
 
     let reqTarget;
@@ -69,56 +112,45 @@ app.get("/e/*", async (req, res, next) => {
 
     const data = Buffer.from(await asset.arrayBuffer());
     const ext = path.extname(reqTarget);
-    const no = [".unityweb"];
-    const contentType = no.includes(ext) ? "application/octet-stream" : mime.getType(ext);
+    const contentType =
+      ext === ".unityweb" ? "application/octet-stream" : mime.getType(ext);
 
     cache.set(req.path, { data, contentType, timestamp: Date.now() });
     res.writeHead(200, { "Content-Type": contentType });
     res.end(data);
   } catch (error) {
     console.error("Error fetching asset:", error);
-    res.setHeader("Content-Type", "text/html");
     res.status(500).send("Error fetching the asset");
   }
 });
 
-// ==================== EDITED / ROUTE ====================
-app.get("/", (req, res, next) => {
-  try {
-    const indexPath = path.join(__dirname, "static", "index.html");
-    const stream = fs.createReadStream(indexPath);
-    res.setHeader("Content-Type", "text/html");
-    stream.pipe(res, { end: false });
-    stream.on("end", () => res.end());
-  } catch (err) {
-    console.error(err);
-    res.status(500).sendFile(path.join(__dirname, "static", "404.html"));
-  }
-});
-// =========================================================
+/* ======================================================
+   STATIC ROUTES
+====================================================== */
 
-const routes = [
+app.get("/", (_req, res) => {
+  res.sendFile(path.join(__dirname, "static", "index.html"));
+});
+
+[
   { path: "/b", file: "apps.html" },
   { path: "/a", file: "games.html" },
   { path: "/play.html", file: "games.html" },
   { path: "/c", file: "settings.html" },
-  { path: "/d", file: "tabs.html" },
-];
-
-routes.forEach(route => {
+  { path: "/d", file: "tabs.html" }
+].forEach(route => {
   app.get(route.path, (_req, res) => {
     res.sendFile(path.join(__dirname, "static", route.file));
   });
 });
 
-app.use((req, res, next) => {
+app.use((_req, res) => {
   res.status(404).sendFile(path.join(__dirname, "static", "404.html"));
 });
 
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).sendFile(path.join(__dirname, "static", "404.html"));
-});
+/* ======================================================
+   SERVER / BARE
+====================================================== */
 
 server.on("request", (req, res) => {
   if (bareServer.shouldRoute(req)) {
@@ -136,8 +168,6 @@ server.on("upgrade", (req, socket, head) => {
   }
 });
 
-server.on("listening", () => {
-  console.log(chalk.green(`🌍 Server is running on http://localhost:${PORT}`));
+server.listen(PORT, () => {
+  console.log(chalk.green(`Server running at http://localhost:${PORT}`));
 });
-
-server.listen({ port: PORT });
