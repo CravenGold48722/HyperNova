@@ -14,11 +14,12 @@ Interstellar is a web proxy application that allows browsing the web through a p
   - `tabs.html` - Tabs management
   - `404.html` - Error page
   - `assets/` - CSS, JS, and media assets
+    - `mathematics/` - Proxy engine files (Scramjet worker and assets)
 
 ## Technology Stack
 - **Runtime**: Node.js 20
 - **Framework**: Express.js
-- **Proxy**: @nebula-services/bare-server-node
+- **Proxy**: Bare Server (Primary) / Scramjet (Assets Prepared)
 - **Package Manager**: pnpm
 
 ## Configuration
