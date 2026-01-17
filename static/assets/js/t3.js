@@ -1,6 +1,6 @@
 // tabs.js
 window.addEventListener("load", () => {
-  navigator.serviceWorker.register("/assets/mathematics/sw.js", { scope: "/a/" });
+  navigator.serviceWorker.register("/sw.js", { scope: "/" });
   const form = document.getElementById("fv");
   const input = document.getElementById("input");
   if (form && input) {

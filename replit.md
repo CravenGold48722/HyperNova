@@ -22,6 +22,13 @@ Interstellar is a web proxy application that allows browsing the web through a p
 - **Proxy**: Scramjet (Primary)
 - **Package Manager**: pnpm
 
+## Branding & Preferences
+- **Name**: HyperNova
+- **Creator**: CravenGold48722
+- **Themes**: Dark cosmic gradient with blue highlights
+- **Cloaking**: Locked to "Clever | Portal" with custom icon
+- **Redirection**: Panic key (Ctrl + E) and auto-cloak both point to Google Classroom
+
 ## Configuration
 - Server runs on port 5000 (configurable via `PORT` environment variable)
 - Password protection can be enabled in `config.js` by setting `challenge: true`

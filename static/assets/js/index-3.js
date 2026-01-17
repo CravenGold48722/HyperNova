@@ -1,7 +1,7 @@
 // index.js
 window.addEventListener("load", () => {
-  navigator.serviceWorker.register("/assets/mathematics/sw.js", {
-    scope: "/a/",
+  navigator.serviceWorker.register("/sw.js", {
+    scope: "/",
   });
 });
 

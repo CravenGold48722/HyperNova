@@ -14,8 +14,8 @@ function AB() {
 <head>
   <meta charset="utf-8">
   <meta name="referrer" content="strict-origin">
-  <script src="/assets/mathematics/config.js"></script>
-  <script src="/assets/mathematics/bundle.js"></script>
+  <script src="/config.js"></script>
+  <script src="/bundle.js"></script>
   <title>Clever | Portal</title>
 </head>
 <body></body>
