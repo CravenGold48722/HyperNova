@@ -1,6 +1,6 @@
 // tabs.js
 window.addEventListener("load", () => {
-  navigator.serviceWorker.register("../sw.js?v=2025-04-15", { scope: "/a/" });
+  navigator.serviceWorker.register("/assets/mathematics/sw.js", { scope: "/a/" });
   const form = document.getElementById("fv");
   const input = document.getElementById("input");
   if (form && input) {
@@ -12,10 +12,9 @@ window.addEventListener("load", () => {
     });
   }
   function processUrl(url) {
-    sessionStorage.setItem("GoUrl", __uv$config.encodeUrl(url));
     const iframeContainer = document.getElementById("frame-container");
     const activeIframe = Array.from(iframeContainer.querySelectorAll("iframe")).find(iframe => iframe.classList.contains("active"));
-    activeIframe.src = `/a/${__uv$config.encodeUrl(url)}`;
+    activeIframe.src = "/ca/fetch?url=" + encodeURIComponent(url);
     activeIframe.dataset.tabUrl = url;
     input.value = url;
     console.log(activeIframe.dataset.tabUrl);
@@ -79,7 +78,8 @@ document.addEventListener("DOMContentLoaded", event => {
         tabTitle.textContent = title;
       }
       newIframe.contentWindow.open = url => {
-        sessionStorage.setItem("URL", `/a/${__uv$config.encodeUrl(url)}`);
+        const encoded = "/ca/fetch?url=" + encodeURIComponent(url);
+        sessionStorage.setItem("URL", encoded);
         createNewTab();
         return null;
       };
@@ -96,20 +96,20 @@ document.addEventListener("DOMContentLoaded", event => {
         if (goUrl.includes("/e/")) {
           newIframe.src = window.location.origin + goUrl;
         } else {
-          newIframe.src = `${window.location.origin}/a/${goUrl}`;
+          newIframe.src = "/ca/fetch?url=" + encodeURIComponent(goUrl);
         }
       } else {
         newIframe.src = "/";
       }
     } else if (tabCounter > 1) {
       if (url !== null) {
-        newIframe.src = window.location.origin + url;
+        newIframe.src = "/ca/fetch?url=" + encodeURIComponent(url);
         sessionStorage.removeItem("URL");
       } else if (goUrl !== null) {
         if (goUrl.includes("/e/")) {
           newIframe.src = window.location.origin + goUrl;
         } else {
-          newIframe.src = `${window.location.origin}/a/${goUrl}`;
+          newIframe.src = "/ca/fetch?url=" + encodeURIComponent(goUrl);
         }
       } else {
         newIframe.src = "/";
@@ -346,20 +346,13 @@ function Load() {
   const activeIframe = document.querySelector("#frame-container iframe.active");
   if (activeIframe && activeIframe.contentWindow.document.readyState === "complete") {
     const website = activeIframe.contentWindow.document.location.href;
-    if (website.includes("/a/")) {
-      const websitePath = website.replace(window.location.origin, "").replace("/a/", "");
-      localStorage.setItem("decoded", websitePath);
-      const decodedValue = decodeXor(websitePath);
-      document.getElementById("input").value = decodedValue;
-    } else if (website.includes("/a/q/")) {
-      const websitePath = website.replace(window.location.origin, "").replace("/a/q/", "");
-      const decodedValue = decodeXor(websitePath);
-      localStorage.setItem("decoded", websitePath);
+    if (website.includes("/ca/fetch?url=")) {
+      const websitePath = website.split("/ca/fetch?url=")[1];
+      const decodedValue = decodeURIComponent(websitePath);
       document.getElementById("input").value = decodedValue;
     } else {
       const websitePath = website.replace(window.location.origin, "");
       document.getElementById("input").value = websitePath;
-      localStorage.setItem("decoded", websitePath);
     }
   }
 }

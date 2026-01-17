@@ -8,7 +8,19 @@ function AB() {
     const style = iframe.style;
     const link = doc.createElement("link");
 
-
+    doc.open();
+    doc.write(`<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="referrer" content="strict-origin">
+  <script src="/assets/mathematics/config.js"></script>
+  <script src="/assets/mathematics/bundle.js"></script>
+  <title>Clever | Portal</title>
+</head>
+<body></body>
+</html>`);
+    doc.close();
 
     iframe.src = location.href;
     style.position = "fixed";
@@ -16,17 +28,14 @@ function AB() {
     style.border = style.outline = "none";
     style.width = style.height = "100%";
 
+    const icon = "/assets/media/favicon/clever.png";
+    link.rel = "icon";
+    link.href = icon;
+
     doc.head.appendChild(link);
     doc.body.appendChild(iframe);
 
-    const isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
     location.replace("https://classroom.google.com/");
-
-    const name = localStorage.getItem("name") || "Google";
-    const icon = localStorage.getItem("icon") || "/assets/media/favicon/google.png";
-    doc.title = name;
-    link.rel = "icon";
-    link.href = icon;
   }
 }
 // home.js

@@ -278,21 +278,18 @@ document.addEventListener("DOMContentLoaded", () => {
     setCloak(options[selectedValue].name, options[selectedValue].icon);
   }
 
-  // Event Key Logic
-  const eventKey = JSON.parse(localStorage.getItem("eventKey")) || ["Ctrl", "E"];
-  const pLink = "https://classroom.google.com/";
-  let pressedKeys = [];
-
-  document.addEventListener("keydown", event => {
-    pressedKeys.push(event.key);
-    if (pressedKeys.length > eventKey.length) {
-      pressedKeys.shift();
-    }
-    if (eventKey.every((key, index) => key === pressedKeys[index])) {
-      window.location.href = pLink;
-      pressedKeys = [];
-    }
-  });
+  // Update search/navigation logic to use Scramjet
+  const searchInput = document.querySelector(".search-input");
+  if (searchInput) {
+    searchInput.addEventListener("keydown", async (e) => {
+      if (e.key === "Enter") {
+        const url = searchInput.value;
+        if (url) {
+          window.location.href = "/ca/fetch?url=" + encodeURIComponent(url);
+        }
+      }
+    });
+  }
 
   // Background Image Logic
   const savedBackgroundImage = localStorage.getItem("backgroundImage");

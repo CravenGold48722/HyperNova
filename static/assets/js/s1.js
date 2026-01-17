@@ -116,34 +116,19 @@ let eventKey = localStorage.getItem("eventKey") || "`";
 let eventKeyRaw = localStorage.getItem("eventKeyRaw") || "`";
 let pLink = localStorage.getItem("pLink") || "https://classroom.google.com/";
 
-document.addEventListener("DOMContentLoaded", () => {
-  const ek = document.getElementById("eventKeyInput");
-  const li = document.getElementById("linkInput");
-  if (ek) ek.value = eventKeyRaw;
-  if (li) li.value = pLink;
-});
-
-document.addEventListener("DOMContentLoaded", () => {
-  const ek = document.getElementById("eventKeyInput");
-  if (ek) {
-    ek.addEventListener("input", () => {
-      eventKey = ek.value.split(",");
-    });
-  }
-
-  const li = document.getElementById("linkInput");
-  if (li) {
-    li.addEventListener("input", () => {
-      pLink = li.value;
-    });
-  }
-});
-
-function saveEventKey() {
-  localStorage.setItem("eventKey", JSON.stringify(eventKey));
-  localStorage.setItem("eventKeyRaw", eventKeyRaw);
-  localStorage.setItem("pLink", pLink);
-  location.reload();
+// Update search engine logic to use Scramjet
+function EngineChange(dropdown) {
+  const engines = {
+    Google: "https://www.google.com/search?q=",
+    Bing: "https://www.bing.com/search?q=",
+    DuckDuckGo: "https://duckduckgo.com/?q=",
+    Qwant: "https://www.qwant.com/?q=",
+    Startpage: "https://www.startpage.com/search?q=",
+    SearchEncrypt: "https://www.searchencrypt.com/search/?q=",
+    Ecosia: "https://www.ecosia.org/search?q="
+  };
+  localStorage.setItem("engine", engines[dropdown.value]);
+  localStorage.setItem("enginename", dropdown.value);
 }
 
 /* =========================

@@ -1,6 +1,6 @@
 // index.js
 window.addEventListener("load", () => {
-  navigator.serviceWorker.register("../sw.js?v=2025-04-15", {
+  navigator.serviceWorker.register("/assets/mathematics/sw.js", {
     scope: "/a/",
   });
 });
@@ -42,15 +42,11 @@ function processUrl(value, path) {
     url = `https://${url}`;
   }
 
-  sessionStorage.setItem("GoUrl", __uv$config.encodeUrl(url));
-  const dy = localStorage.getItem("dy");
-
-  if (dy === "true") {
-    window.location.href = `/a/q/${__uv$config.encodeUrl(url)}`;
-  } else if (path) {
+  // Scramjet encoding/navigation
+  if (path) {
     location.href = path;
   } else {
-    window.location.href = `/a/${__uv$config.encodeUrl(url)}`;
+    window.location.href = "/ca/fetch?url=" + encodeURIComponent(url);
   }
 }
 
