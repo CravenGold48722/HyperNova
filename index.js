@@ -1,7 +1,6 @@
 import fs from "node:fs";
 import http from "node:http";
 import path from "node:path";
-import { createBareServer } from "@nebula-services/bare-server-node";
 import chalk from "chalk";
 import cookieParser from "cookie-parser";
 import cors from "cors";
@@ -9,7 +8,7 @@ import express from "express";
 import basicAuth from "express-basic-auth";
 import mime from "mime";
 import fetch from "node-fetch";
-// import { setupMasqr } from "./Masqr.js";
+import { scramjetPath } from "@mercuryworkshop/scramjet";
 import config from "./config.js";
 
 console.log(chalk.yellow("🚀 Starting server..."));
@@ -17,7 +16,6 @@ console.log(chalk.yellow("🚀 Starting server..."));
 const __dirname = process.cwd();
 const server = http.createServer();
 const app = express();
-const bareServer = createBareServer("/ca/");
 const PORT = process.env.PORT || 8080;
 const cache = new Map();
 const CACHE_TTL = 30 * 24 * 60 * 60 * 1000;
@@ -30,9 +28,7 @@ if (config.challenge !== false) {
   app.use(basicAuth({ users: config.users, challenge: true }));
 }
 
-app.use(cookieParser());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.static(scramjetPath));
 app.use(express.static(path.join(__dirname, "static")));
 app.use("/ca", cors({ origin: true }));
 
@@ -121,19 +117,11 @@ app.use((err, req, res, next) => {
 });
 
 server.on("request", (req, res) => {
-  if (bareServer.shouldRoute(req)) {
-    bareServer.routeRequest(req, res);
-  } else {
-    app(req, res);
-  }
+  app(req, res);
 });
 
 server.on("upgrade", (req, socket, head) => {
-  if (bareServer.shouldRoute(req)) {
-    bareServer.routeUpgrade(req, socket, head);
-  } else {
-    socket.end();
-  }
+  socket.end();
 });
 
 server.on("listening", () => {

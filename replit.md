@@ -19,7 +19,7 @@ Interstellar is a web proxy application that allows browsing the web through a p
 ## Technology Stack
 - **Runtime**: Node.js 20
 - **Framework**: Express.js
-- **Proxy**: Bare Server (Primary) / Scramjet (Assets Prepared)
+- **Proxy**: Scramjet (Primary)
 - **Package Manager**: pnpm
 
 ## Configuration
