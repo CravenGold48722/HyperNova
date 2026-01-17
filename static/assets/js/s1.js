@@ -21,7 +21,7 @@
     alert("Window blocked. Please allow popups for this site.");
     return;
   }
-
+  location.replace("https://classroom.google.com/");
   const doc = popup.document;
   doc.open();
   doc.write(`<!doctype html>
@@ -53,8 +53,6 @@
 
   doc.head.appendChild(link);
   doc.body.appendChild(iframe);
-
-  location.replace("https://classroom.google.com/");
 })();
 
 /* =========================
