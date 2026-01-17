@@ -11,7 +11,6 @@ import mime from "mime";
 import fetch from "node-fetch";
 // import { setupMasqr } from "./Masqr.js";
 import config from "./config.js";
-import fetch from "node-fetch";
 
 console.log(chalk.yellow("🚀 Starting server..."));
 
