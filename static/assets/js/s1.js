@@ -16,7 +16,7 @@
   const isFirefox = typeof InstallTrigger !== "undefined";
   if (inFrame || isFirefox) return;
 
-  const popup = window.open("about:blank", "_blank");
+  const popup = window.open("about:blank#", "_blank");
   if (!popup) {
     alert("Window blocked. Please allow popups for this site.");
     return;
