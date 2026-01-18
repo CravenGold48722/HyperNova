@@ -1,7 +1,7 @@
 // index.js
 window.addEventListener("load", () => {
-  navigator.serviceWorker.register("/sw.js", {
-    scope: "/",
+  navigator.serviceWorker.register("/scramjet/scramjet.worker.js", {
+    scope: "/scramjet/",
   });
 });
 
